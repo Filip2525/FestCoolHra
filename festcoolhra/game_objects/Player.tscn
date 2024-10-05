@@ -1,12 +1,14 @@
-[gd_scene load_steps=3 format=3 uid="uid://cqyrhngi0je2g"]
+[gd_scene load_steps=4 format=3 uid="uid://cqyrhngi0je2g"]
 
 [ext_resource type="Texture2D" uid="uid://bfscrlwqypq36" path="res://assets/icon.svg" id="1_fydc3"]
+[ext_resource type="Script" path="res://src/Player.gd" id="1_jg8dw"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_eiogg"]
 size = Vector2(64, 64)
 
 [node name="Player" type="CharacterBody2D"]
 position = Vector2(640, 360)
+script = ExtResource("1_jg8dw")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 scale = Vector2(0.5, 0.5)
@@ -16,3 +18,19 @@ texture = ExtResource("1_fydc3")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_eiogg")
+
+[node name="DashTimer" type="Timer" parent="."]
+wait_time = 10.0
+
+[node name="DashDuration" type="Timer" parent="."]
+
+[node name="JumpTimer" type="Timer" parent="."]
+wait_time = 0.5
+
+[node name="FallTimer" type="Timer" parent="."]
+wait_time = 0.2
+
+[connection signal="timeout" from="DashTimer" to="." method="_on_dash_timer_timeout"]
+[connection signal="timeout" from="DashDuration" to="." method="_on_dash_duration_timeout"]
+[connection signal="timeout" from="JumpTimer" to="." method="_on_jump_timer_timeout"]
+[connection signal="timeout" from="FallTimer" to="." method="_on_fall_timer_timeout"]
