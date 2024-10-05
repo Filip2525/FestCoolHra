@@ -8,7 +8,7 @@
 [ext_resource type="Texture2D" uid="uid://ckxramkalv5uw" path="res://assets/Tilesets/03-Pig/Run (34x28).png" id="6_mmc4b"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_4sdm2"]
-size = Vector2(19, 16)
+size = Vector2(14.3333, 15)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_n237y"]
 atlas = ExtResource("2_t54o8")
@@ -234,26 +234,35 @@ animations = [{
 "speed": 5.0
 }]
 
-[node name="Enemy" type="Node2D"]
-position = Vector2(640, 360)
+[node name="Enemy" type="CharacterBody2D"]
+position = Vector2(-9, -19)
+scale = Vector2(3, 3)
 script = ExtResource("1_p480t")
 
-[node name="Enemy" type="CharacterBody2D" parent="."]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Enemy"]
-position = Vector2(2.5, 3)
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(2.83333, 6.5)
 shape = SubResource("RectangleShape2D_4sdm2")
 
-[node name="idle_timer" type="Timer" parent="Enemy"]
+[node name="IdleTimer" type="Timer" parent="."]
 wait_time = 1.5
 one_shot = true
 
-[node name="idle_move" type="Timer" parent="Enemy"]
+[node name="IdleMove" type="Timer" parent="."]
 one_shot = true
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Enemy"]
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_s3vh6")
 animation = &"run"
+frame_progress = 0.142578
 
-[connection signal="timeout" from="Enemy/idle_timer" to="." method="_on_idle_timer_timeout"]
-[connection signal="timeout" from="Enemy/idle_move" to="." method="_on_idle_move_timeout"]
+[node name="RayCast2D" type="RayCast2D" parent="."]
+position = Vector2(3, 4)
+target_position = Vector2(-69.6667, 0)
+
+[node name="CoolDown" type="Timer" parent="."]
+wait_time = 4.0
+one_shot = true
+
+[connection signal="timeout" from="IdleTimer" to="." method="_on_idle_timer_timeout"]
+[connection signal="timeout" from="IdleMove" to="." method="_on_idle_move_timeout"]
+[connection signal="timeout" from="CoolDown" to="." method="_on_cool_down_timeout"]

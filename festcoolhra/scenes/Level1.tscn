@@ -1,9 +1,10 @@
-[gd_scene load_steps=9 format=4 uid="uid://dpqfgoc5yrpyp"]
+[gd_scene load_steps=10 format=4 uid="uid://dpqfgoc5yrpyp"]
 
 [ext_resource type="TileSet" uid="uid://ds48ct4k1jco7" path="res://assets/Tilesets/walls.tres" id="1_8rqo6"]
 [ext_resource type="PackedScene" uid="uid://dtx0wdn14fbnc" path="res://scenes/Coin.tscn" id="2_6x5bj"]
 [ext_resource type="PackedScene" uid="uid://juqf076anrid" path="res://game_objects/Door.tscn" id="2_drww6"]
 [ext_resource type="PackedScene" uid="uid://cqyrhngi0je2g" path="res://game_objects/Player.tscn" id="3_g0xhe"]
+[ext_resource type="PackedScene" uid="uid://ddoyrbusebumt" path="res://game_objects/Enemy.tscn" id="5_why05"]
 
 [sub_resource type="SegmentShape2D" id="SegmentShape2D_2467r"]
 a = Vector2(641, 452)
@@ -89,3 +90,6 @@ shape = SubResource("RectangleShape2D_a8xcw")
 [node name="CollisionShape2D4" type="CollisionShape2D" parent="PlatformColliders"]
 position = Vector2(1248, 268)
 shape = SubResource("RectangleShape2D_3bgtn")
+
+[node name="Enemy" parent="." instance=ExtResource("5_why05")]
+position = Vector2(1108, 425)

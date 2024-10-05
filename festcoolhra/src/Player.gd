@@ -7,10 +7,10 @@ var dash_cooldown = false
 var double = false
 var canjump = true
 var savejump = false
-@onready var JumpTimer = get_node("JumpTimer")
-@onready var DashTimer = get_node("DashTimer")
-@onready var FallTimer = get_node("FallTimer")
-@onready var DashDuration = get_node("DashDuration")
+@onready var JumpTimer = $JumpTimer
+@onready var DashTimer = $DashTimer
+@onready var FallTimer = $FallTimer
+@onready var DashDuration = $DashDuration
 
 func _on_dash_timer_timeout() -> void:
 	dash_cooldown = false
