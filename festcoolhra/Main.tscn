@@ -1,3 +1,20 @@
-[gd_scene format=3 uid="uid://bw1bf7nu8ge3u"]
+[gd_scene load_steps=3 format=3 uid="uid://bw1bf7nu8ge3u"]
+
+[ext_resource type="Texture2D" uid="uid://bfscrlwqypq36" path="res://icon.svg" id="1_dnykm"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_mvfog"]
+size = Vector2(64, 64)
 
 [node name="Node2D" type="Node2D"]
+
+[node name="Player" type="CharacterBody2D" parent="."]
+position = Vector2(640, 360)
+
+[node name="Camera2D" type="Camera2D" parent="Player"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Player"]
+shape = SubResource("RectangleShape2D_mvfog")
+
+[node name="Sprite2D" type="Sprite2D" parent="Player"]
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("1_dnykm")
