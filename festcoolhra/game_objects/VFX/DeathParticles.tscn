@@ -1,5 +1,6 @@
-[gd_scene load_steps=3 format=3 uid="uid://c04lrl80pmd0w"]
+[gd_scene load_steps=4 format=3 uid="uid://c04lrl80pmd0w"]
 
+[ext_resource type="Script" path="res://game_objects/VFX/Particles.gd" id="1_ntbqi"]
 [ext_resource type="Texture2D" uid="uid://dnivoxcpwghql" path="res://assets/circle.svg" id="1_v4fn8"]
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_bwmrk"]
@@ -15,19 +16,30 @@ hue_variation_min = 0.95
 hue_variation_max = 1.0
 
 [node name="DeathParticles" type="Node2D"]
+script = ExtResource("1_ntbqi")
 
 [node name="GPUParticles2D" type="GPUParticles2D" parent="."]
 modulate = Color(1, 0.17, 0.183833, 1)
+emitting = false
 amount = 30
 process_material = SubResource("ParticleProcessMaterial_bwmrk")
 texture = ExtResource("1_v4fn8")
+lifetime = 10.0
+one_shot = true
+speed_scale = 2.0
 explosiveness = 1.0
+fixed_fps = 50
 draw_order = 2
 
 [node name="GPUParticles2D2" type="GPUParticles2D" parent="."]
 modulate = Color(1, 0.2, 0.2, 1)
+emitting = false
 amount = 5
 process_material = SubResource("ParticleProcessMaterial_bwmrk")
 texture = ExtResource("1_v4fn8")
+lifetime = 10.0
+one_shot = true
+speed_scale = 2.0
 explosiveness = 1.0
+fixed_fps = 50
 trail_enabled = true

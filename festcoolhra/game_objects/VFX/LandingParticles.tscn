@@ -1,5 +1,6 @@
-[gd_scene load_steps=6 format=3 uid="uid://cf77ukrlxhayq"]
+[gd_scene load_steps=7 format=3 uid="uid://cf77ukrlxhayq"]
 
+[ext_resource type="Script" path="res://game_objects/VFX/Particles.gd" id="1_ckrce"]
 [ext_resource type="Texture2D" uid="uid://dnivoxcpwghql" path="res://assets/circle.svg" id="1_objmd"]
 
 [sub_resource type="CurveXYZTexture" id="CurveXYZTexture_bp2vr"]
@@ -28,12 +29,18 @@ hue_variation_min = -1.0
 hue_variation_max = -0.91
 
 [node name="LandingParticles" type="Node2D"]
+script = ExtResource("1_ckrce")
 
 [node name="GPUParticles2D" type="GPUParticles2D" parent="."]
 modulate = Color(0.901163, 0.88446, 0.780564, 1)
-amount = 80
+emitting = false
+amount = 20
 process_material = SubResource("ParticleProcessMaterial_6ne72")
 texture = ExtResource("1_objmd")
 lifetime = 2.0
+one_shot = true
+speed_scale = 2.0
+explosiveness = 1.0
+fixed_fps = 50
 draw_order = 2
 trail_sections = 10
