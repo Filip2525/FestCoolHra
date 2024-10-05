@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://bw1bf7nu8ge3u"]
 
-[ext_resource type="Texture2D" uid="uid://bfscrlwqypq36" path="res://icon.svg" id="1_dnykm"]
+[ext_resource type="Texture2D" uid="uid://bfscrlwqypq36" path="res://assets/icon.svg" id="1_0ob8p"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_mvfog"]
 size = Vector2(64, 64)
@@ -17,4 +17,4 @@ shape = SubResource("RectangleShape2D_mvfog")
 
 [node name="Sprite2D" type="Sprite2D" parent="Player"]
 scale = Vector2(0.5, 0.5)
-texture = ExtResource("1_dnykm")
+texture = ExtResource("1_0ob8p")
