@@ -1,0 +1,67 @@
+[gd_scene load_steps=7 format=3 uid="uid://dx8q3a7w08ntj"]
+
+[ext_resource type="Texture2D" uid="uid://c0t6mt2weofpf" path="res://assets/Tilesets/CoinSheet.png" id="1_vyef4"]
+[ext_resource type="Script" path="res://scenes/animation_player.gd" id="2_fw31q"]
+
+[sub_resource type="GDScript" id="GDScript_e2hgp"]
+script/source = "extends Node2D
+
+
+# Called when the node enters the scene tree for the first time.
+func _ready():
+	pass # Replace with function body.
+
+
+# Called every frame. 'delta' is the elapsed time since the previous frame.
+func _process(delta):
+	pass
+"
+
+[sub_resource type="Animation" id="Animation_jd8ql"]
+resource_name = "IdleCoin"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.133333, 0.3, 0.433333, 0.6, 1),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5]
+}
+
+[sub_resource type="Animation" id="Animation_5fp1j"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_288io"]
+_data = {
+"IdleCoin": SubResource("Animation_jd8ql"),
+"RESET": SubResource("Animation_5fp1j")
+}
+
+[node name="Coin" type="Node2D"]
+script = SubResource("GDScript_e2hgp")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_vyef4")
+hframes = 6
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_288io")
+}
+script = ExtResource("2_fw31q")

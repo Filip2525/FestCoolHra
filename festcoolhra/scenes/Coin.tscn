@@ -1,0 +1,61 @@
+[gd_scene load_steps=7 format=3 uid="uid://dx8q3a7w08ntj"]
+
+[ext_resource type="Script" path="res://src/coin.gd" id="1_uqjfp"]
+[ext_resource type="Texture2D" uid="uid://c0t6mt2weofpf" path="res://assets/Tilesets/CoinSheet.png" id="1_vyef4"]
+
+[sub_resource type="Animation" id="Animation_jd8ql"]
+resource_name = "IdleCoin"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4, 0.6, 0.8),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 3, 2, 1]
+}
+
+[sub_resource type="Animation" id="Animation_5fp1j"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_288io"]
+_data = {
+"IdleCoin": SubResource("Animation_jd8ql"),
+"RESET": SubResource("Animation_5fp1j")
+}
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_eyhlm"]
+
+[node name="Coin" type="Node2D"]
+position = Vector2(619, 359)
+script = ExtResource("1_uqjfp")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_vyef4")
+hframes = 6
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_288io")
+}
+
+[node name="Area2D" type="Area2D" parent="."]
+scale = Vector2(10, 10)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("CircleShape2D_eyhlm")
