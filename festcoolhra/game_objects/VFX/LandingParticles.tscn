@@ -1,0 +1,39 @@
+[gd_scene load_steps=6 format=3 uid="uid://cf77ukrlxhayq"]
+
+[ext_resource type="Texture2D" uid="uid://dnivoxcpwghql" path="res://assets/circle.svg" id="1_objmd"]
+
+[sub_resource type="CurveXYZTexture" id="CurveXYZTexture_bp2vr"]
+
+[sub_resource type="Curve" id="Curve_n8a0m"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_28jkn"]
+curve = SubResource("Curve_n8a0m")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_6ne72"]
+particle_flag_disable_z = true
+direction = Vector3(0, -1, 0)
+spread = 51.236
+initial_velocity_min = 30.0
+initial_velocity_max = 70.0
+directional_velocity_min = 1.0
+directional_velocity_max = 1.0
+directional_velocity_curve = SubResource("CurveXYZTexture_bp2vr")
+gravity = Vector3(0, 98, 0)
+scale_min = 0.05
+scale_max = 0.1
+scale_curve = SubResource("CurveTexture_28jkn")
+hue_variation_min = -1.0
+hue_variation_max = -0.91
+
+[node name="LandingParticles" type="Node2D"]
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="."]
+modulate = Color(0.901163, 0.88446, 0.780564, 1)
+amount = 80
+process_material = SubResource("ParticleProcessMaterial_6ne72")
+texture = ExtResource("1_objmd")
+lifetime = 2.0
+draw_order = 2
+trail_sections = 10
