@@ -1,10 +1,15 @@
-[gd_scene load_steps=4 format=3 uid="uid://bw1bf7nu8ge3u"]
+[gd_scene load_steps=6 format=3 uid="uid://bw1bf7nu8ge3u"]
 
 [ext_resource type="AudioStream" uid="uid://b5ch12ab5k7ml" path="res://assets/Music/MainMenu.mp3" id="1_lbdds"]
+[ext_resource type="Script" path="res://scenes/MainMenuManager.gd" id="1_r2hvn"]
 [ext_resource type="Script" path="res://src/SoundController.gd" id="2_1iy28"]
 [ext_resource type="FontFile" uid="uid://dyovcxiuoy6g8" path="res://assets/Font/PlayfairDisplay-Regular.ttf" id="3_p6ulv"]
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1j3bd"]
+bg_color = Color(0.156863, 0.145098, 0.184314, 1)
+
 [node name="MainMenu" type="Node2D"]
+script = ExtResource("1_r2hvn")
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("1_lbdds")
@@ -39,6 +44,17 @@ theme_override_fonts/font = ExtResource("3_p6ulv")
 theme_override_font_sizes/font_size = 32
 text = "Start"
 
+[node name="Settings" type="Button" parent="Panel"]
+layout_mode = 0
+offset_left = 216.0
+offset_top = 92.0
+offset_right = 424.0
+offset_bottom = 148.0
+theme_override_fonts/font = ExtResource("3_p6ulv")
+theme_override_font_sizes/font_size = 32
+text = "Settings
+"
+
 [node name="LevelSelection" type="Button" parent="Panel"]
 layout_mode = 0
 offset_left = 160.0
@@ -60,13 +76,13 @@ theme_override_font_sizes/font_size = 32
 text = "Exit To Desktop
 "
 
-[node name="ExitToDesktop2" type="Button" parent="Panel"]
-layout_mode = 0
-offset_left = 216.0
-offset_top = 92.0
-offset_right = 424.0
-offset_bottom = 148.0
-theme_override_fonts/font = ExtResource("3_p6ulv")
-theme_override_font_sizes/font_size = 32
-text = "Options
-"
+[node name="Settings" type="Panel" parent="."]
+visible = false
+offset_left = 256.0
+offset_top = 48.0
+offset_right = 1024.0
+offset_bottom = 576.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_1j3bd")
+
+[connection signal="pressed" from="Panel/Settings" to="." method="_on_settings_pressed"]
+[connection signal="pressed" from="Panel/ExitToDesktop" to="." method="_on_exit_to_desktop_pressed"]
