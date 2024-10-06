@@ -7,9 +7,6 @@
 [ext_resource type="Texture2D" uid="uid://8aw33mm15l5s" path="res://assets/Tilesets/03-Pig/Hit (34x28).png" id="4_4nily"]
 [ext_resource type="Texture2D" uid="uid://ckxramkalv5uw" path="res://assets/Tilesets/03-Pig/Run (34x28).png" id="6_mmc4b"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_4sdm2"]
-size = Vector2(14.3333, 15)
-
 [sub_resource type="AtlasTexture" id="AtlasTexture_n237y"]
 atlas = ExtResource("2_t54o8")
 region = Rect2(0, 0, 34, 28)
@@ -157,7 +154,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_vrtl6")
 }],
-"loop": true,
+"loop": false,
 "name": &"dead",
 "speed": 5.0
 }, {
@@ -234,14 +231,27 @@ animations = [{
 "speed": 5.0
 }]
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_4sdm2"]
+size = Vector2(14.3333, 15)
+
 [node name="Enemy" type="CharacterBody2D"]
 position = Vector2(-9, -19)
 scale = Vector2(3, 3)
 script = ExtResource("1_p480t")
 
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_s3vh6")
+animation = &"attack"
+frame = 1
+frame_progress = 0.153415
+
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(2.83333, 6.5)
 shape = SubResource("RectangleShape2D_4sdm2")
+
+[node name="RayCast2D" type="RayCast2D" parent="."]
+position = Vector2(3, 4)
+target_position = Vector2(-69.6667, 0)
 
 [node name="IdleTimer" type="Timer" parent="."]
 wait_time = 1.5
@@ -250,19 +260,17 @@ one_shot = true
 [node name="IdleMove" type="Timer" parent="."]
 one_shot = true
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
-sprite_frames = SubResource("SpriteFrames_s3vh6")
-animation = &"run"
-frame_progress = 0.142578
-
-[node name="RayCast2D" type="RayCast2D" parent="."]
-position = Vector2(3, 4)
-target_position = Vector2(-69.6667, 0)
-
 [node name="CoolDown" type="Timer" parent="."]
 wait_time = 4.0
 one_shot = true
 
+[node name="AttackCooldown" type="Timer" parent="."]
+one_shot = true
+
+[node name="Attacking" type="Timer" parent="."]
+
 [connection signal="timeout" from="IdleTimer" to="." method="_on_idle_timer_timeout"]
 [connection signal="timeout" from="IdleMove" to="." method="_on_idle_move_timeout"]
 [connection signal="timeout" from="CoolDown" to="." method="_on_cool_down_timeout"]
+[connection signal="timeout" from="AttackCooldown" to="." method="_on_attack_cooldown_timeout"]
+[connection signal="timeout" from="Attacking" to="." method="_on_attacking_timeout"]
