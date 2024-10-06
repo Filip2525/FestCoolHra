@@ -1,0 +1,107 @@
+[gd_scene load_steps=2 format=3 uid="uid://b4qb6l54fhym3"]
+
+[ext_resource type="Script" path="res://src/MenuSignalManager.gd" id="1_apyo2"]
+
+[node name="Menu" type="Control"]
+process_mode = 2
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_apyo2")
+
+[node name="Panel" type="Panel" parent="."]
+layout_mode = 0
+offset_left = 304.0
+offset_top = 112.0
+offset_right = 944.0
+offset_bottom = 624.0
+
+[node name="Music" type="CheckButton" parent="Panel"]
+layout_mode = 0
+offset_left = 64.0
+offset_top = 32.0
+offset_right = 168.0
+offset_bottom = 88.0
+scale = Vector2(2, 2)
+
+[node name="Sounds" type="CheckButton" parent="Panel"]
+layout_mode = 0
+offset_left = 368.0
+offset_top = 32.0
+offset_right = 473.0
+offset_bottom = 88.0
+scale = Vector2(2, 2)
+
+[node name="Continue" type="Button" parent="Panel"]
+layout_mode = 0
+offset_left = 176.0
+offset_top = 224.0
+offset_right = 488.0
+offset_bottom = 289.0
+theme_override_font_sizes/font_size = 25
+text = "Continue"
+
+[node name="ExitToMainMenu" type="Button" parent="Panel"]
+layout_mode = 0
+offset_left = 176.0
+offset_top = 312.0
+offset_right = 488.0
+offset_bottom = 377.0
+theme_override_font_sizes/font_size = 25
+text = "Exit to Main Menu"
+
+[node name="ExitToDesktop" type="Button" parent="Panel"]
+layout_mode = 0
+offset_left = 176.0
+offset_top = 400.0
+offset_right = 488.0
+offset_bottom = 465.0
+theme_override_font_sizes/font_size = 25
+text = "Exit to Desktop"
+
+[node name="Volume" type="HSlider" parent="Panel"]
+layout_mode = 0
+offset_left = 327.0
+offset_top = 152.0
+offset_right = 525.0
+offset_bottom = 199.0
+value = 100.0
+rounded = true
+
+[node name="Label" type="Label" parent="Panel"]
+layout_mode = 0
+offset_left = 143.0
+offset_top = 147.0
+offset_right = 275.0
+offset_bottom = 197.0
+theme_override_font_sizes/font_size = 36
+text = "Volume"
+
+[node name="Label2" type="Label" parent="Panel"]
+layout_mode = 0
+offset_left = 40.0
+offset_top = 56.0
+offset_right = 184.0
+offset_bottom = 112.0
+theme_override_font_sizes/font_size = 36
+text = "Music"
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="Label3" type="Label" parent="Panel"]
+layout_mode = 0
+offset_left = 360.0
+offset_top = 56.0
+offset_right = 496.0
+offset_bottom = 112.0
+theme_override_font_sizes/font_size = 36
+text = "Sounds"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[connection signal="toggled" from="Panel/Music" to="." method="_on_music_toggled"]
+[connection signal="toggled" from="Panel/Sounds" to="." method="_on_sounds_toggled"]
+[connection signal="value_changed" from="Panel/Volume" to="." method="_on_volume_value_changed"]

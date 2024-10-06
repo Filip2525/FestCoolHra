@@ -43,7 +43,6 @@ _data = {
 radius = 0.600002
 
 [node name="Coin" type="Node2D"]
-position = Vector2(619, 359)
 script = ExtResource("1_uqjfp")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
