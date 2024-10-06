@@ -11,6 +11,8 @@ var moving = 0
 
 @export var idle_speed = 40
 @export var speed = 75
+@export var acceleration = 2
+@export var max_speed = 200
 @export var gravity = 15
 var direction = Vector2(1, gravity)
 
@@ -19,6 +21,8 @@ var direction = Vector2(1, gravity)
 
 @export var detection_range = 250
 var player: CharacterBody2D
+
+@export var hp = 70
 
 func _ready() -> void:
 	idle_wait_timer.start()
@@ -39,12 +43,20 @@ func _physics_process(delta: float) -> void:
 		
 	if status == 1:
 		var distance_to_player_x = player.global_position.x - global_position.x
-		print(distance_to_player_x)
+		var prev_direction_x = direction.x
+		
 		if distance_to_player_x > 0:
 			direction.x = 1
 		else:
 			direction.x = -1
-		velocity.x = direction.x * speed * delta * 60
+		
+		if prev_direction_x != direction.x:
+			velocity.x = 0
+		
+		if velocity.x == 0:
+			velocity.x = direction.x * speed * delta * 60
+		else:
+			velocity.x += direction.x * acceleration * delta * 60
 		
 		if 1 > distance_to_player_x and distance_to_player_x > -1:
 			velocity.x = 0
@@ -57,6 +69,8 @@ func _physics_process(delta: float) -> void:
 	turn()
 	detection_ray.target_position.x = detection_range * direction.x
 	move_and_slide()
+	print(velocity.x)
+	velocity.x = clamp(velocity.x, -1 * max_speed, max_speed)
 
 
 func turn():
