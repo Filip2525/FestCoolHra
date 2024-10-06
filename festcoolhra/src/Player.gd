@@ -1,8 +1,13 @@
 extends CharacterBody2D
 
 var SPEED = 300.0
+var current_speed = 0.0
+
+var direction: float
+var moving: bool
+
 const JUMP_VELOCITY = -500.0
-var acceleration = 1
+var acceleration = 20
 var dash_cooldown = false
 var double = false
 var canjump = true
@@ -11,6 +16,11 @@ var savejump = false
 @onready var DashTimer = $DashTimer
 @onready var FallTimer = $FallTimer
 @onready var DashDuration = $DashDuration
+
+@onready var Feet: Node2D = $Feet
+
+var landed: bool = false
+var LandingParticles = preload("res://game_objects/VFX/LandingParticles.tscn")
 
 func _on_dash_timer_timeout() -> void:
 	dash_cooldown = false
@@ -25,12 +35,17 @@ func _on_fall_timer_timeout() -> void:
 func _physics_process(delta: float) -> void:
 	# Add the gravity.
 	if not is_on_floor():
+		landed = false
 		if not JumpTimer.time_left:
 			JumpTimer.start()
 		velocity += get_gravity() * delta
 	if is_on_floor():
+		if not landed:
+			Feet.add_child(LandingParticles.instantiate())
+		landed = true
 		canjump = true
 		double = false
+		
 
 	# Handle jump.
 	if Input.is_action_just_pressed("ui_accept") and canjump or savejump:
@@ -47,17 +62,25 @@ func _physics_process(delta: float) -> void:
 		DashTimer.start()
 		DashDuration.start()
 		dash_cooldown = true
-		SPEED = 800
-
-	# Get the input direction and handle the movement/deceleration.
-	# As good practice, you should replace UI actions with custom gameplay actions.
-	var direction := Input.get_axis("ui_left", "ui_right")
-	if direction:
-		velocity.x = direction * SPEED
-		if SPEED < 400:
-			SPEED += 0.5
+		current_speed = 800
+		
+	moving = false
+	
+	if Input.is_action_pressed("ui_left"):
+		direction += -1
+		moving = true
+	
+	if Input.is_action_pressed("ui_right"):
+		direction += 1
+		moving = true
+		
+	direction = clamp(direction, -1, 1)
+	
+	if moving:
+		current_speed = move_toward(current_speed, direction*SPEED, acceleration)
 	else:
-		SPEED = 300.0
-		velocity.x = move_toward(velocity.x, 0, SPEED)
+		current_speed = move_toward(current_speed, 0, acceleration)
+		
+	velocity.x = current_speed
 
 	move_and_slide()

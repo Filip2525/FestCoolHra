@@ -1,6 +1,7 @@
-[gd_scene load_steps=7 format=3 uid="uid://dtx0wdn14fbnc"]
+[gd_scene load_steps=8 format=3 uid="uid://dtx0wdn14fbnc"]
 
 [ext_resource type="Script" path="res://src/coin.gd" id="1_uqjfp"]
+[ext_resource type="Texture2D" uid="uid://ddaxnelwflaxo" path="res://assets/2d_lights_and_shadows_neutral_point_light.png" id="3_6pg8c"]
 [ext_resource type="Texture2D" uid="uid://b6ehe7lpbio7a" path="res://assets/Tilesets/12-Live and Coins/Big Diamond Idle (18x14).png" id="3_xlpid"]
 
 [sub_resource type="Animation" id="Animation_jd8ql"]
@@ -43,10 +44,10 @@ _data = {
 radius = 0.600002
 
 [node name="Coin" type="Node2D"]
-position = Vector2(619, 359)
 script = ExtResource("1_uqjfp")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
+modulate = Color(2, 2, 5, 1)
 texture = ExtResource("3_xlpid")
 hframes = 10
 
@@ -61,3 +62,8 @@ scale = Vector2(10, 10)
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 position = Vector2(0.2, -0.1)
 shape = SubResource("CircleShape2D_eyhlm")
+
+[node name="PointLight2D" type="PointLight2D" parent="."]
+modulate = Color(0.278431, 0.803922, 0.972549, 1)
+shadow_enabled = true
+texture = ExtResource("3_6pg8c")

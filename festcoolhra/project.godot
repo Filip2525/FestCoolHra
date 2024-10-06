@@ -35,3 +35,4 @@ SHIFT={
 [rendering]
 
 environment/defaults/default_clear_color=Color(0.247059, 0.219608, 0.317647, 1)
+viewport/hdr_2d=true

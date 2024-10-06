@@ -1,8 +1,8 @@
-[gd_scene load_steps=10 format=4 uid="uid://dpqfgoc5yrpyp"]
+[gd_scene load_steps=12 format=4 uid="uid://dpqfgoc5yrpyp"]
 
 [ext_resource type="TileSet" uid="uid://ds48ct4k1jco7" path="res://assets/Tilesets/walls.tres" id="1_8rqo6"]
 [ext_resource type="PackedScene" uid="uid://dtx0wdn14fbnc" path="res://scenes/Coin.tscn" id="2_6x5bj"]
-[ext_resource type="PackedScene" uid="uid://juqf076anrid" path="res://game_objects/Door.tscn" id="2_drww6"]
+[ext_resource type="PackedScene" path="res://game_objects/Door.tscn" id="2_drww6"]
 [ext_resource type="PackedScene" uid="uid://cqyrhngi0je2g" path="res://game_objects/Player.tscn" id="3_g0xhe"]
 [ext_resource type="PackedScene" uid="uid://ddoyrbusebumt" path="res://game_objects/Enemy.tscn" id="5_why05"]
 
@@ -19,6 +19,12 @@ size = Vector2(193, 23)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_3bgtn"]
 size = Vector2(64, 24)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_appmq"]
+polygon = PackedVector2Array(63, 831, 576, 833, 577, 578, 1281, 577, 1281, 257, 1600, 257, 1599, 126, 447, 128, 447, 381, 63, 384)
+
+[sub_resource type="Environment" id="Environment_ni8mb"]
+background_mode = 3
 
 [node name="Level1" type="Node2D"]
 
@@ -39,6 +45,7 @@ tile_map_data = PackedByteArray("AAAGAAoAAQACAAIAAAAHAAoAAQADAAIAAAAIAAoAAQADAAI
 tile_set = ExtResource("1_8rqo6")
 
 [node name="OtherThings" type="TileMapLayer" parent="."]
+position = Vector2(0, -1)
 scale = Vector2(2, 2)
 tile_map_data = PackedByteArray("AAAIAAMAAQABAAEAAAAIAAQAAQABAAIAAAAIAAUAAQABAAMAAAAMAAMAAQABAAEAAAAMAAQAAQABAAIAAAAMAAUAAQABAAMAAAACAAcAAQAEAAMAAAACAAgAAQAEAAQAAAADAAcAAQAFAAMAAAADAAgAAQAFAAQAAAARAAYAAQAEAAMAAAARAAcAAQAEAAQAAAASAAYAAQAFAAMAAAASAAcAAQAFAAQAAAAOAAIAAQACAAMAAAAOAAMAAQACAAQAAAAPAAIAAQADAAMAAAAPAAMAAQADAAQAAAA=")
 tile_set = ExtResource("1_8rqo6")
@@ -53,7 +60,7 @@ position = Vector2(645, 403)
 scale = Vector2(2, 2)
 
 [node name="Coin2" parent="Coins" instance=ExtResource("2_6x5bj")]
-position = Vector2(1283, 229)
+position = Vector2(1321, 203)
 scale = Vector2(2, 2)
 
 [node name="Coin3" parent="Coins" instance=ExtResource("2_6x5bj")]
@@ -95,3 +102,9 @@ shape = SubResource("RectangleShape2D_3bgtn")
 
 [node name="Enemy" parent="." instance=ExtResource("5_why05")]
 position = Vector2(1108, 425)
+
+[node name="LightOccluder2D" type="LightOccluder2D" parent="."]
+occluder = SubResource("OccluderPolygon2D_appmq")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_ni8mb")
